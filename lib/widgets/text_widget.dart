@@ -14,6 +14,7 @@ class TextBig extends StatelessWidget {
         fontWeight: FontWeight.w600,
         color: Colors.white,
       ),
+      textAlign: TextAlign.center,
     );
   }
 }
@@ -28,9 +29,9 @@ class TextNormal extends StatelessWidget {
     return Text(
       txt,
       style: const TextStyle(
-        fontSize: 20,
-        fontWeight: FontWeight.w500,
+        fontSize: 22,
         color: Colors.white,
+        fontWeight: FontWeight.w600,
       ),
     );
   }
@@ -46,8 +47,7 @@ class TextSmall extends StatelessWidget {
     return Text(
       txt,
       style: const TextStyle(
-        fontSize: 18,
-        fontWeight: FontWeight.w500,
+        fontSize: 16,
         color: Colors.white,
       ),
     );
