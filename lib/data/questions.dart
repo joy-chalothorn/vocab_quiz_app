@@ -1,5 +1,6 @@
 import 'package:quiz_vocab_app/models/quiz_question.dart';
 
+// Correct answer will be always at first choice
 const questions = [
   QuizQuestion(
     'What does "business" mean?',

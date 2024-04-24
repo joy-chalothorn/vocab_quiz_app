@@ -48,8 +48,8 @@ class TextSmall extends StatelessWidget {
       txt,
       style: const TextStyle(
         fontSize: 16,
-        color: Colors.white,
       ),
+      textAlign: TextAlign.center,
     );
   }
 }
