@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:quiz_vocab_app/data/questions.dart';
 import 'package:quiz_vocab_app/pages/questions_screen.dart';
+import 'package:quiz_vocab_app/pages/results_screen.dart';
 import 'package:quiz_vocab_app/pages/start_screen.dart';
 
 class Quiz extends StatefulWidget {
@@ -28,6 +30,17 @@ class _QuizState extends State<Quiz> {
     });
   }
 
+  void chooseAnswer(String chosenAnswer) {
+    selectedAnswer.add(chosenAnswer);
+
+    if (selectedAnswer.length == questions.length) {
+      setState(() {
+        // selectedAnswer.clear();
+        activeScreen = 'results-screen';
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     ////// final screenWidget = activeScreen == 'start-screen'
@@ -37,7 +50,11 @@ class _QuizState extends State<Quiz> {
     Widget screenWidget = StartScreen(switchScreen);
 
     if (activeScreen == 'questions-screen') {
-      screenWidget = const QuestionsScreen();
+      screenWidget = QuestionsScreen(onSelectedAnswer: chooseAnswer);
+    }
+
+    if (activeScreen == 'results-screen') {
+      screenWidget = ResultsScreen(chosenAnswers: selectedAnswer);
     }
 
     return Scaffold(
