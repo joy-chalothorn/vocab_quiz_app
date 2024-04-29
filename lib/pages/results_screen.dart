@@ -1,14 +1,18 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
+
 import 'package:quiz_vocab_app/data/questions.dart';
-import 'package:quiz_vocab_app/models/questions_summary.dart';
+import 'package:quiz_vocab_app/models/questions_summary/questions_summary.dart';
 import 'package:quiz_vocab_app/widgets/text_widget.dart';
 
 class ResultsScreen extends StatelessWidget {
-  const ResultsScreen({super.key, required this.chosenAnswers});
+  const ResultsScreen({
+    super.key,
+    required this.chosenAnswers,
+    required this.onRestart,
+  });
 
   final List<String> chosenAnswers;
+  final void Function() onRestart;
 
   // Result of list questions and answers
   List<Map<String, Object>> get summaryData {
@@ -30,9 +34,8 @@ class ResultsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final totalData = summaryData;
     final numTotalQuestions = questions.length;
-    final numCorrectQuestion = totalData
+    final numCorrectQuestion = summaryData
         .where((data) => data['user_answer'] == data['correct_answer'])
         .length;
 
@@ -49,13 +52,14 @@ class ResultsScreen extends StatelessWidget {
             height: 20,
           ),
           //  List of QuestionsSummary
-          QuestionsSummary(totalData),
+          QuestionsSummary(summaryData),
           const SizedBox(
             height: 30,
           ),
-          TextButton(
-            onPressed: () {},
-            child: const TextNormal('Restart Quiz!'),
+          TextButton.icon(
+            onPressed: onRestart,
+            icon: const Icon(Icons.refresh),
+            label: const TextNormal('Restart Quiz!'),
           ),
         ],
       ),

@@ -20,7 +20,7 @@ class _QuizState extends State<Quiz> {
   //   super.initState();
   // }
 
-  final List<String> selectedAnswer = [];
+  List<String> selectedAnswer = [];
 
   var activeScreen = 'start-screen';
 
@@ -41,6 +41,13 @@ class _QuizState extends State<Quiz> {
     }
   }
 
+  void restartQuiz() {
+    setState(() {
+      selectedAnswer = [];
+      activeScreen = 'questions-screen';
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     ////// final screenWidget = activeScreen == 'start-screen'
@@ -54,7 +61,10 @@ class _QuizState extends State<Quiz> {
     }
 
     if (activeScreen == 'results-screen') {
-      screenWidget = ResultsScreen(chosenAnswers: selectedAnswer);
+      screenWidget = ResultsScreen(
+        chosenAnswers: selectedAnswer,
+        onRestart: restartQuiz,
+      );
     }
 
     return Scaffold(
